@@ -1,0 +1,14 @@
+/* *{padding: 10px;} */
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 97vw;
+    height: 97vh;
+}
+.default{
+    width: 97vw;
+    height: 97vh;
+    background-color: grey;
+}
