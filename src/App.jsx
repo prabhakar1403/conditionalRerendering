@@ -1,28 +1,40 @@
-import { useState } from 'react'
-import './index.css'
-
-function App(name) {
-    let [counter, setCounter]= useState(15);
-    const addValue = () => {
-        setCounter(counter + 1);
-    }
-    const removeValue = () => {
-        setCounter(counter - 1);
-    }
-      return (
-    <>
-        <div className='container' style={{backgroundColor : 'lightBlue', borderRadius: '5px'}}>
-            <h1>Hello {name.name || 'Coders'}</h1>
-            <h3>Lets try some counter functionality</h3>
-            <h2>{counter}</h2>
-            <button onClick={addValue}>Add Value</button>
-            <br />
-            <button onClick={removeValue}>Remove Value</button>
-        </div>
-    </>
-    )
-}
-export default App
+// App.js 
+import React, { useState } from 'react'; 
+import useGitHubRepos from './hooks/useGitHubRepos'; 
+const App = () => { 
+    const [username, setUsername] = useState(''); 
+    const repos = useGitHubRepos(username); 
+    const handleSubmit = (e) => { 
+        e.preventDefault(); 
+        setUsername(e.target.elements.username.value); 
+    }; 
+    return ( 
+    <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }}> 
+    <h1>GitHub Repos</h1> 
+    <form onSubmit={handleSubmit}> 
+        <input type="text" 
+        name="username" 
+        placeholder="Enter GitHub username" 
+        required 
+        style={{ width: '100%', padding: '8px', marginBottom: '10px' }} 
+        /> 
+        <button type="submit" 
+        style={{ padding: '8px', width: '100%' }}>
+            Submit
+            </button> 
+            </form> 
+        <ul> 
+            {repos.map(repo => ( 
+                <li key={repo.id}> 
+                <a href={repo.html_url} 
+                target="_blank" rel="noopener noreferrer">
+                    {repo.name}</a> 
+                </li> ))} 
+        </ul> 
+    </div> ); 
+    }; 
+    
+    export default App;
 
 
 
